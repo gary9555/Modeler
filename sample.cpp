@@ -1,5 +1,6 @@
 // The sample model.  You should build a file
 // very similar to this for when you make your model.
+// changed by me
 #include "modelerview.h"
 #include "modelerapp.h"
 #include "modelerdraw.h"
@@ -74,7 +75,7 @@ int main()
 {
 	// Initialize the controls
 	// Constructor is ModelerControl(name, minimumvalue, maximumvalue, 
-	// stepsize, defaultvalue)
+	// stepsize, defaultvalue)   
     ModelerControl controls[NUMCONTROLS];
     controls[XPOS] = ModelerControl("X Position", -5, 5, 0.1f, 0);
     controls[YPOS] = ModelerControl("Y Position", 0, 5, 0.1f, 0);

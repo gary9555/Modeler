@@ -82,7 +82,7 @@ void setAmbientColor(float r, float g, float b)
     mds->m_ambientColor[0] = (GLfloat)r;
     mds->m_ambientColor[1] = (GLfloat)g;
     mds->m_ambientColor[2] = (GLfloat)b;
-    mds->m_ambientColor[3] = (GLfloat)1.0;
+    mds->m_ambientColor[3] = (GLfloat)1.0;  
     
     if (mds->m_drawMode == NORMAL)
         glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT, mds->m_ambientColor);

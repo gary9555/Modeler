@@ -32,7 +32,7 @@ void SampleModel::draw()
     // matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
     ModelerView::draw();
-
+	// trying VS github
 	// draw the floor
 	setAmbientColor(.1f,.1f,.1f);
 	setDiffuseColor(COLOR_RED);

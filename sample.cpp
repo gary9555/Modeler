@@ -44,6 +44,41 @@ void SampleModel::draw()
 	// draw the sample model
 	setAmbientColor(.1f,.1f,.1f);
 	setDiffuseColor(COLOR_GREEN);
+	
+	/*
+	setDiffuseColor(COLOR_BLUE);
+	glPushMatrix();
+	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
+		// center of the body
+		glPushMatrix();
+		glTranslated(0, 0, 0);
+		glScaled(2, 1, 1);
+		drawSphere(1);
+		glScaled(0.5, 1, 1);
+
+			// Upper Body		
+			glPushMatrix();
+			glRotated(VAL(UPPER_BODY_X), 1.0, 0.0, 0.0);
+			glRotated(VAL(UPPER_BODY_Y), 0.0, 1.0, 0.0);
+			glRotated(VAL(UPPER_BODY_Z), 0.0, 0.0, 1.0);
+			glRotated(-90, 1.0, 0.0, 0.0);
+			glScaled(2, 1.4, 1);
+			drawCylinder(4,1,1.2);
+			glPopMatrix();
+
+			// Lower Body
+			glPushMatrix();
+			glRotated(0, 1.0, 0.0, 0.0);
+			glRotated(0, 0.0, 1.0, 0.0);
+			glRotated(0, 0.0, 0.0, 1.0);
+			glRotated(90, 1.0, 0.0, 0.0);
+			glScaled(2, 1.4, 1);
+			drawCylinder(3, 1, 1.2);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+	*/
+	
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
@@ -74,6 +109,7 @@ void SampleModel::draw()
 		glPopMatrix();
 
 	glPopMatrix();
+	
 }
 
 int main()
@@ -88,7 +124,9 @@ int main()
     controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
 	controls[WIRE] = ModelerControl("Wire Lenght", 0, 5, 0.1f, 1);
-	
+	controls[UPPER_BODY_X] = ModelerControl("Upper Body X", -90, 90, 1, 0);
+	controls[UPPER_BODY_Y] = ModelerControl("Upper Body Y", -90, 90, 1, 0);
+	controls[UPPER_BODY_Z] = ModelerControl("Upper Body Z", -45, 45, 1, 0);
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

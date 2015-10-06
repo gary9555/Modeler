@@ -51,6 +51,12 @@ void SampleModel::draw()
 		glTranslated(-1.5, 0, -2);
 		glScaled(3, 1, 4);
 		drawBox(1,1,1);
+		glTranslated(0.5,0.3,-0.1);
+		drawBox(0.2,0.4,0.1);
+			glPushMatrix();
+			glTranslated(0.1, 0.2, 0.05);
+			drawBox(0.02,VAL(WIRE),0.02);
+			glPopMatrix();
 		glPopMatrix();
 
 		// draw cannon
@@ -81,6 +87,8 @@ int main()
     controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
     controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
+	controls[WIRE] = ModelerControl("Wire Lenght", 0, 5, 0.1f, 1);
+	
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

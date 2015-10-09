@@ -42,6 +42,9 @@ enum SampleModelControls
 	RIGHT_UPPER_LEG_Z,
 	LEFT_LOWER_LEG_X,
 	RIGHT_LOWER_LEG_X,
+	HEAD_X,
+	HEAD_Y,
+	HEAD_Z,
 	NUMCONTROLS
 };
 

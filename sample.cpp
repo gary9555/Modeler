@@ -34,12 +34,15 @@ void SampleModel::draw()
     ModelerView::draw();
 	// trying VS github
 	// draw the floor
-	setAmbientColor(.1f,.1f,.1f);
+	
+	/*
+	setAmbientColor(.1f,.1f,.1f);	
 	setDiffuseColor(COLOR_RED);
 	glPushMatrix();
 	glTranslated(-5,0,-5);
 	drawBox(10,0.01f,10);
 	glPopMatrix();
+	*/
 
 	// draw the sample model
 	setAmbientColor(.1f,.1f,.1f);
@@ -111,8 +114,20 @@ void SampleModel::draw()
 				glPopMatrix();
 
 				// Neck pivot
-				glPushMatrix();
-
+				glPushMatrix();				
+					glTranslated(0,0,4);
+					drawSphere(0.7);
+						// Neck
+						glRotated(90, 1, 0, 0);
+						glRotated(VAL(HEAD_Z), 0, 0, 1);
+						glRotated(VAL(HEAD_X), 1, 0, 0);
+						glRotated(VAL(HEAD_Y), 0, 1, 0);
+						glRotated(-90, 1, 0, 0);
+						drawCylinder(1,0.7,0.7);
+							// head
+							glTranslated(0,0,1.5);
+							glScaled(1,1,1.5);
+							drawSphere(1);
 				glPopMatrix();
 			glPopMatrix();
 
@@ -239,7 +254,10 @@ int main()
 	controls[RIGHT_UPPER_LEG_Y] = ModelerControl("Right Upper Leg Y", -90, 45, 1, 0);
 	controls[RIGHT_UPPER_LEG_Z] = ModelerControl("Right Upper Leg Z", -45, 0, 1, 0);
 	controls[LEFT_LOWER_LEG_X] = ModelerControl("Left Lower Leg X", 0, 160, 1, 0);
-	controls[RIGHT_LOWER_LEG_X] = ModelerControl("Left Lower Leg X", 0, 160, 1, 0);
+	controls[RIGHT_LOWER_LEG_X] = ModelerControl("Right Lower Leg X", 0, 160, 1, 0);
+	controls[HEAD_X] = ModelerControl("Head X", -60, 60, 1, 0);
+	controls[HEAD_Y] = ModelerControl("Head Y", -90, 90, 1, 0);
+	controls[HEAD_Z] = ModelerControl("Head Z", -45, 45, 1, 0);
 
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);

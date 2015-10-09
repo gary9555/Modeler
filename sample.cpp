@@ -43,7 +43,7 @@ void SampleModel::draw()
 
 	// draw the sample model
 	setAmbientColor(.1f,.1f,.1f);
-	setDiffuseColor(COLOR_GREEN);
+	//setDiffuseColor(COLOR_GREEN);
 	
 	
 	setDiffuseColor(COLOR_BLUE);
@@ -69,14 +69,22 @@ void SampleModel::draw()
 				glTranslated(2.2, 0, 3.2);
 				drawSphere(0.8);
 					// Left upper arm
-					glPushMatrix();
 					glRotated(90, 1.0, 0.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_ARM_X), 1.0, 0.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_ARM_Z), 0.0, 0.0, 1.0);
 					glRotated(VAL(LEFT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
 					glRotated(90, 1.0, 0.0, 0.0);
 					drawCylinder(4.5,0.8,0.6);
-					glPopMatrix();
+						// Left lower arm pivot
+						glTranslated(0, 0, 4.5);
+						drawSphere(0.6);
+							// Left lower arm
+							glRotated(-90, 1.0, 0.0, 0.0);
+							glRotated(VAL(LEFT_LOWER_ARM_X), 1.0, 0.0, 0.0);
+							glRotated(90, 1.0, 0.0, 0.0);
+							drawCylinder(3.5,0.6,0.4);
+								// Left hand pivot
+
 				glPopMatrix();
 
 				// Right upper arm pivot
@@ -84,14 +92,22 @@ void SampleModel::draw()
 				glTranslated(-2.2, 0, 3.2);
 				drawSphere(0.8);
 					// Right upper arm
-					glPushMatrix();
 					glRotated(90, 1.0, 0.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_X), 1.0, 0.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_Z), 0.0, 0.0, 1.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
 					glRotated(90, 1.0, 0.0, 0.0);
 					drawCylinder(4.5, 0.8, 0.6);
-					glPopMatrix();
+						// Right lower arm pivot
+						glTranslated(0, 0, 4.5);
+						drawSphere(0.6);
+							// Right lower arm
+							glRotated(-90, 1.0, 0.0, 0.0);
+							glRotated(VAL(RIGHT_LOWER_ARM_X), 1.0, 0.0, 0.0);
+							glRotated(90, 1.0, 0.0, 0.0);
+							drawCylinder(3.5, 0.6, 0.4);
+								//Right hand pivot
+								
 				glPopMatrix();
 
 				// Neck pivot
@@ -111,12 +127,43 @@ void SampleModel::draw()
 			glScaled(0.5, 1/1.4, 1);
 				// Left upper leg pivot
 				glPushMatrix(); 
+				glTranslated(1, 0, 3);
+				drawSphere(1.0);
+					// Left upper leg
+					glRotated(-90, 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_LEG_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_LEG_Z), 0.0, 0.0, 1.0);
+					glRotated(VAL(LEFT_UPPER_LEG_Y), 0.0, 1.0, 0.0);
+					glRotated(90, 1.0, 0.0, 0.0);
+					drawCylinder(4,1,0.8);
+						// Left lower leg pivot
+						glTranslated(0, 0, 4);
+						drawSphere(0.8);
+							// Left lower leg						
+							glRotated(VAL(LEFT_LOWER_LEG_X), 1.0, 0.0, 0.0);
+							drawCylinder(4,0.8,0.6);
 
 				glPopMatrix();
+
 				// Right upper leg pivot
 				glPushMatrix();
-
+				glTranslated(-1, 0, 3);
+				drawSphere(1.0);
+					// Right upper leg
+					glRotated(-90, 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_LEG_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_LEG_Z), 0.0, 0.0, 1.0);
+					glRotated(VAL(RIGHT_UPPER_LEG_Y), 0.0, 1.0, 0.0);
+					glRotated(90, 1.0, 0.0, 0.0);
+					drawCylinder(4, 1, 0.8);
+						// Left lower leg pivot
+						glTranslated(0, 0, 4);
+						drawSphere(0.8);
+							// Left lower leg						
+							glRotated(VAL(RIGHT_LOWER_LEG_X), 1.0, 0.0, 0.0);
+							drawCylinder(4, 0.8, 0.6);
 				glPopMatrix();
+
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
@@ -173,12 +220,27 @@ int main()
 	controls[LOWER_BODY_X] = ModelerControl("Lower Body X", -90, 90, 1, 0);
 	controls[LOWER_BODY_Y] = ModelerControl("Lower Body Y", -90, 90, 1, 0);
 	controls[LOWER_BODY_Z] = ModelerControl("Lower Body Z", -45, 45, 1, 0);
-	controls[LEFT_UPPER_ARM_X] = ModelerControl("Left Upper Arm X", -180, 45, 1, -15);
+	controls[LEFT_UPPER_ARM_X] = ModelerControl("Left Upper Arm X", -180, 45, 1, -15); // -15
 	controls[LEFT_UPPER_ARM_Y] = ModelerControl("Left Upper Arm Y", -180, 90, 1, 0);
-	controls[LEFT_UPPER_ARM_Z] = ModelerControl("Left Upper Arm Z", 0, 180, 1, 15);
-	controls[RIGHT_UPPER_ARM_X] = ModelerControl("Right Upper Arm X", -180, 45, 1, -15);
+	controls[LEFT_UPPER_ARM_Z] = ModelerControl("Left Upper Arm Z", 0, 180, 1, 15);  //15
+	controls[RIGHT_UPPER_ARM_X] = ModelerControl("Right Upper Arm X", -180, 45, 1, -15); //-15
 	controls[RIGHT_UPPER_ARM_Y] = ModelerControl("Right Upper Arm Y", -90, 180, 1, 0);
-	controls[RIGHT_UPPER_ARM_Z] = ModelerControl("Right Upper Arm Z", -180, 0, 1, -15);
+	controls[RIGHT_UPPER_ARM_Z] = ModelerControl("Right Upper Arm Z", -180, 0, 1, -15);//15
+	controls[LEFT_LOWER_ARM_X] = ModelerControl("Left Lower Arm X", -140, 0, 1, 0);
+	controls[RIGHT_LOWER_ARM_X] = ModelerControl("Right Lower Arm X", -140, 0, 1, 0); 
+	controls[LEFT_HAND_X] = ModelerControl("Left Hand X", -30, 30, 1, 0); 
+	controls[LEFT_HAND_Z] = ModelerControl("Left Hand Z", -60, 60, 1, 0);
+	controls[RIGHT_HAND_X] = ModelerControl("Right Hand X", -30, 30, 1, 0);
+	controls[RIGHT_HAND_Z] = ModelerControl("Right Hand Z", -60, 60, 1, 0);
+	controls[LEFT_UPPER_LEG_X] = ModelerControl("Left Upper Leg X", -90, 45, 1, 0);
+	controls[LEFT_UPPER_LEG_Y] = ModelerControl("Left Upper Leg Y", -45, 90, 1, 0);
+	controls[LEFT_UPPER_LEG_Z] = ModelerControl("Left Upper Leg Z", 0, 45, 1, 0);
+	controls[RIGHT_UPPER_LEG_X] = ModelerControl("Right Upper Leg X", -90, 45, 1, 0);
+	controls[RIGHT_UPPER_LEG_Y] = ModelerControl("Right Upper Leg Y", -90, 45, 1, 0);
+	controls[RIGHT_UPPER_LEG_Z] = ModelerControl("Right Upper Leg Z", -45, 0, 1, 0);
+	controls[LEFT_LOWER_LEG_X] = ModelerControl("Left Lower Leg X", 0, 160, 1, 0);
+	controls[RIGHT_LOWER_LEG_X] = ModelerControl("Left Lower Leg X", 0, 160, 1, 0);
+
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

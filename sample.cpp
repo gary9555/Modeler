@@ -45,13 +45,12 @@ void SampleModel::draw()
 	setAmbientColor(.1f,.1f,.1f);
 	setDiffuseColor(COLOR_GREEN);
 	
-	/*
+	
 	setDiffuseColor(COLOR_BLUE);
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 		// center of the body
 		glPushMatrix();
-		glTranslated(0, 0, 0);
 		glScaled(2, 1, 1);
 		drawSphere(1);
 		glScaled(0.5, 1, 1);
@@ -64,21 +63,65 @@ void SampleModel::draw()
 			glRotated(-90, 1.0, 0.0, 0.0);
 			glScaled(2, 1.4, 1);
 			drawCylinder(4,1,1.2);
+			glScaled(0.5, 1 / 1.4, 1);
+				// Left upper arm pivot
+				glPushMatrix();
+				glTranslated(2.2, 0, 3.2);
+				drawSphere(0.8);
+					// Left upper arm
+					glPushMatrix();
+					glRotated(90, 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_ARM_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_ARM_Z), 0.0, 0.0, 1.0);
+					glRotated(VAL(LEFT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
+					glRotated(90, 1.0, 0.0, 0.0);
+					drawCylinder(4.5,0.8,0.6);
+					glPopMatrix();
+				glPopMatrix();
+
+				// Right upper arm pivot
+				glPushMatrix();
+				glTranslated(-2.2, 0, 3.2);
+				drawSphere(0.8);
+					// Right upper arm
+					glPushMatrix();
+					glRotated(90, 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_Z), 0.0, 0.0, 1.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
+					glRotated(90, 1.0, 0.0, 0.0);
+					drawCylinder(4.5, 0.8, 0.6);
+					glPopMatrix();
+				glPopMatrix();
+
+				// Neck pivot
+				glPushMatrix();
+
+				glPopMatrix();
 			glPopMatrix();
 
 			// Lower Body
 			glPushMatrix();
-			glRotated(0, 1.0, 0.0, 0.0);
-			glRotated(0, 0.0, 1.0, 0.0);
-			glRotated(0, 0.0, 0.0, 1.0);
+			glRotated(VAL(LOWER_BODY_X), 1.0, 0.0, 0.0);
+			glRotated(VAL(LOWER_BODY_Y), 0.0, 1.0, 0.0);
+			glRotated(VAL(LOWER_BODY_Z), 0.0, 0.0, 1.0);
 			glRotated(90, 1.0, 0.0, 0.0);
 			glScaled(2, 1.4, 1);
 			drawCylinder(3, 1, 1.2);
+			glScaled(0.5, 1/1.4, 1);
+				// Left upper leg pivot
+				glPushMatrix(); 
+
+				glPopMatrix();
+				// Right upper leg pivot
+				glPushMatrix();
+
+				glPopMatrix();
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
-	*/
 	
+	/*
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
@@ -109,7 +152,7 @@ void SampleModel::draw()
 		glPopMatrix();
 
 	glPopMatrix();
-	
+	*/
 }
 
 int main()
@@ -127,6 +170,15 @@ int main()
 	controls[UPPER_BODY_X] = ModelerControl("Upper Body X", -90, 90, 1, 0);
 	controls[UPPER_BODY_Y] = ModelerControl("Upper Body Y", -90, 90, 1, 0);
 	controls[UPPER_BODY_Z] = ModelerControl("Upper Body Z", -45, 45, 1, 0);
+	controls[LOWER_BODY_X] = ModelerControl("Lower Body X", -90, 90, 1, 0);
+	controls[LOWER_BODY_Y] = ModelerControl("Lower Body Y", -90, 90, 1, 0);
+	controls[LOWER_BODY_Z] = ModelerControl("Lower Body Z", -45, 45, 1, 0);
+	controls[LEFT_UPPER_ARM_X] = ModelerControl("Left Upper Arm X", -180, 45, 1, -15);
+	controls[LEFT_UPPER_ARM_Y] = ModelerControl("Left Upper Arm Y", -180, 90, 1, 0);
+	controls[LEFT_UPPER_ARM_Z] = ModelerControl("Left Upper Arm Z", 0, 180, 1, 15);
+	controls[RIGHT_UPPER_ARM_X] = ModelerControl("Right Upper Arm X", -180, 45, 1, -15);
+	controls[RIGHT_UPPER_ARM_Y] = ModelerControl("Right Upper Arm Y", -90, 180, 1, 0);
+	controls[RIGHT_UPPER_ARM_Z] = ModelerControl("Right Upper Arm Z", -180, 0, 1, -15);
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

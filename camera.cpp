@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <Fl/gl.h>
 #include <gl/glu.h>
-
+#include <math.h>
 #include "camera.h"
 
 #pragma warning(push)
@@ -15,6 +15,60 @@ const float kMouseRotationSensitivity		= 1.0f/90.0f;
 const float kMouseTranslationXSensitivity	= 0.03f;
 const float kMouseTranslationYSensitivity	= 0.03f;
 const float kMouseZoomSensitivity			= 0.08f;
+
+void Normalize(double* vector)
+{
+	double vectorbase = sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
+	vector[0] = vector[0] / vectorbase;
+	vector[1] = vector[1] / vectorbase;
+	vector[2] = vector[2] / vectorbase;
+}
+
+void LookAt(Vec3f eye, Vec3f at, Vec3f up)
+{
+	double forward[3];
+	double newup[3];
+	double side[3];
+	double matrix2[16];
+	forward[0] = at[0] - eye[0];
+	forward[1] = at[1] - eye[1];
+	forward[2] = at[2] - eye[2];
+	Normalize(forward);
+
+	side[0] = forward[1] * up[2] - forward[2] * up[1];
+	side[1] = forward[2] * up[0] - forward[0] * up[2];
+	side[2] = forward[0] * up[1] - forward[1] * up[0];
+	Normalize(side);
+
+	newup[0] = side[1] * forward[2] - side[2] * forward[1];
+	newup[1] = side[2] * forward[0] - side[0] * forward[2];
+	newup[2] = side[0] * forward[1] - side[1] * forward[0];
+	Normalize(newup);
+
+	matrix2[0] = side[0];
+	matrix2[4] = side[1];
+	matrix2[8] = side[2];
+	matrix2[12] = 0.0;
+
+	matrix2[1] = newup[0];
+	matrix2[5] = newup[1];
+	matrix2[9] = newup[2];
+	matrix2[13] = 0.0;
+	
+	matrix2[2] = -forward[0];
+	matrix2[6] = -forward[1];
+	matrix2[10] = -forward[2];
+	matrix2[14] = 0.0;
+	
+	matrix2[3] = matrix2[7] = matrix2[11] = 0.0;
+	matrix2[15] = 1.0;
+
+
+	glMultMatrixd(matrix2);
+	glTranslated(-eye[0],-eye[1],-eye[2]);
+
+}
+
 
 void MakeDiagonal(Mat4f &m, float k)
 {
@@ -176,11 +230,11 @@ void Camera::applyViewingTransform() {
 	if( mDirtyTransform )
 		calculateViewingTransformParameters();
 
-	// Place the camera at mPosition, aim the camera at
-	// mLookAt, and twist the camera such that mUpVector is up
-	gluLookAt(	mPosition[0], mPosition[1], mPosition[2],
-				mLookAt[0],   mLookAt[1],   mLookAt[2],
-				mUpVector[0], mUpVector[1], mUpVector[2]);
+/*	gluLookAt(mPosition[0], mPosition[1], mPosition[2],
+		mLookAt[0], mLookAt[1], mLookAt[2],
+		mUpVector[0], mUpVector[1], mUpVector[2]);
+*/
+	LookAt(mPosition, mLookAt, mUpVector);
 }
 
 #pragma warning(pop)

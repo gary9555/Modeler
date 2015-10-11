@@ -13,7 +13,9 @@ typedef enum { kActionNone, kActionTranslate, kActionRotate, kActionZoom, kActio
 class Camera {
     
 protected:
-    
+   
+	void		Normalize(double* vector);
+
     float		mElevation;
     float		mAzimuth;
     float		mDolly;

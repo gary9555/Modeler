@@ -24,6 +24,7 @@ void Normalize(double* vector)
 	vector[2] = vector[2] / vectorbase;
 }
 
+// Our own lookat function
 void LookAt(Vec3f eye, Vec3f at, Vec3f up)
 {
 	double forward[3];

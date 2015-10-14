@@ -45,6 +45,8 @@ enum SampleModelControls
 	HEAD_X,
 	HEAD_Y,
 	HEAD_Z,
+	LEFT_FOOT_X,
+	RIGHT_FOOT_X,
 	NUMCONTROLS
 };
 

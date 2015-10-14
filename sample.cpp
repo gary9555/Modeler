@@ -94,6 +94,12 @@ void SampleModel::draw()
 									glRotated(VAL(LEFT_HAND_Z), 0.0, 1.0, 0.0);
 									glTranslated(-0.2, -0.5, 0);
 									drawBox(0.4, 1, 1.2);
+										// Left thumb
+										glTranslated(0, 1, 0);
+										glTranslated(0.2, 0, 0);
+										glRotated(VAL(LEFT_THUMB), 1.0, 0.0, 0.0);
+										glTranslated(-0.2, 0, 0);
+										drawBox(0.4,0.4,0.6);
 				glPopMatrix();
 
 				// Right upper arm pivot
@@ -123,6 +129,12 @@ void SampleModel::draw()
 									glRotated(VAL(RIGHT_HAND_Z), 0.0, 1.0, 0.0);
 									glTranslated(-0.2, -0.5, 0);
 									drawBox(0.4, 1, 1.2);
+										// Right thumb
+										glTranslated(0, 1, 0);
+										glTranslated(0.2, 0, 0);
+										glRotated(VAL(RIGHT_THUMB), 1.0, 0.0, 0.0);
+										glTranslated(-0.2, 0, 0);
+										drawBox(0.4, 0.4, 0.6);
 				glPopMatrix();
 
 				// Neck pivot
@@ -292,6 +304,9 @@ int main()
 	controls[LEFT_HAND_Z] = ModelerControl("Left Hand Z", -60, 60, 1, 0);
 	controls[RIGHT_HAND_X] = ModelerControl("Right Hand X", -35, 35, 1, 0);
 	controls[RIGHT_HAND_Z] = ModelerControl("Right Hand Z", -60, 60, 1, 0);
+	controls[LEFT_THUMB] = ModelerControl("Left Thumb", -90, 0, 1, 0);
+	controls[RIGHT_THUMB] = ModelerControl("Right Thumb", -90, 0, 1, 0);
+
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

@@ -490,7 +490,43 @@ void drawHead()
 	setDiffuseColor(0.0f, 0.8f, 0.8f);
 	glPopMatrix();
 
-	glEnd();
+	//glEnd();
+}
+
+void drawGun(){
+	// right and left
+	drawTriangle(-0.4, 0, 0, -0.4, 0, 1, -0.4, 1.5, 0);
+	drawTriangle(-0.4, 0, 1, -0.4, 1.5, 1, -0.4, 1.5, 0);
+	drawTriangle(0.4, 0, 0, 0.4, 0, 1, 0.4, 1.5, 0);
+	drawTriangle(0.4, 0, 1, 0.4, 1.5, 1, 0.4, 1.5, 0);
+
+	// under
+	drawTriangle(-0.4, 0, 0, -0.4, 0, 1, 0.4, 0, 0);
+	drawTriangle(-0.4, 0, 1, 0.4, 0, 1, 0.4, 0, 0);
+
+	// front and back
+	drawTriangle(-0.4, 0, 1, 0.4, 0, 1, -0.4, 1.5, 1);
+	drawTriangle(0.4, 0, 1, 0.4, 1.5, 1, -0.4, 1.5, 1);
+	drawTriangle(-0.4, 0, 0, 0.4, 0, 0, -0.4, 3, 0);
+	drawTriangle(0.4, 0, 0, 0.4, 3, 0, -0.4, 3, 0);
+
+	// up right and up left
+	drawTriangle(-0.4, 1.5, 0, -0.4, 1.5, 4, -0.4, 3, 0);
+	drawTriangle(-0.4, 1.5, 4, -0.4, 3, 4, -0.4, 3, 0);
+	drawTriangle(0.4, 1.5, 0, 0.4, 1.5, 4, 0.4, 3, 0);
+	drawTriangle(0.4, 1.5, 4, 0.4, 3, 4, 0.4, 3, 0);
+
+	// up under and up up 
+	drawTriangle(-0.4, 1.5, 0, -0.4, 1.5, 4, 0.4, 1.5, 4);
+	drawTriangle(0.4, 1.5, 4, 0.4, 1.5, 0, -0.4, 1.5, 0);
+	drawTriangle(-0.4, 3, 0, -0.4, 3, 4, 0.4, 3, 4);
+	drawTriangle(0.4, 3, 4, 0.4, 3, 0, -0.4, 3, 0);
+
+	// front front pyramid
+	drawTriangle(0, 2.25, 5, -0.4, 3, 4, -0.4, 1.5, 4);
+	drawTriangle(0, 2.25, 5, -0.4, 1.5, 4, 0.4, 1.5, 4);
+	drawTriangle(0, 2.25, 5, 0.4, 1.5, 4, 0.4, 3, 4);
+	drawTriangle(0, 2.25, 5, 0.4, 3, 4, -0.4, 3, 4);
 }
 
 

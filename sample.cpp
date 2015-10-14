@@ -7,14 +7,33 @@
 
 #include "modelerglobals.h"
 
+#define  MAX_COUNT    60
+
 // To make a SampleModel, we inherit off of ModelerView
 class SampleModel : public ModelerView 
 {
 public:
-    SampleModel(int x, int y, int w, int h, char *label) 
-        : ModelerView(x,y,w,h,label) { }
+	SampleModel(int x, int y, int w, int h, char *label)
+		: ModelerView(x, y, w, h, label), animateCounter(0) {
+		int i = 0;
+		for (int j=0; j < MAX_COUNT / 4; i++,j++)
+			leftLegX[i] = -45 * j / (MAX_COUNT / 4);
+		for (int j = 0; j < MAX_COUNT / 4; i++,j++)
+			leftLegX[i] = -45 + 45 * j / (MAX_COUNT / 4);
+		for (int j = 0; j < MAX_COUNT / 4; i++,j++)
+			leftLegX[i] = 45 * j / (MAX_COUNT / 4);
+		for (int j = 0; j < MAX_COUNT/4; i++,j++)
+			leftLegX[i] = 45 - 45 * j / (MAX_COUNT / 4);
+		for (i = 0; i < MAX_COUNT; i++)
+			rightLegX[i] = -leftLegX[i];			
+	}
 
+	
     virtual void draw();
+private:
+	int animateCounter;
+	int leftLegX[60];
+	int rightLegX[60];
 };
 
 // We need to make a creator function, mostly because of
@@ -45,14 +64,17 @@ void SampleModel::draw()
 	*/
 
 	// draw the sample model
-	//setAmbientColor(.1f,.1f,.1f);
 	setAmbientColor(1, 1, 1);
-	//setDiffuseColor(COLOR_GREEN);
 	
 	
 	setDiffuseColor(COLOR_BLUE);
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
+		// Just a complex shaped rendered by triangles
+		glPushMatrix();
+		glTranslated(6, 0, 0);
+		drawGun();
+		glPopMatrix();
 		// center of the body
 		glPushMatrix();
 		glScaled(2, 1, 1);
@@ -74,7 +96,7 @@ void SampleModel::draw()
 				drawSphere(0.8);
 					// Left upper arm
 					glRotated(90, 1.0, 0.0, 0.0);
-					glRotated(VAL(LEFT_UPPER_ARM_X) - VAL(LEFT_LINK_MOTION)*  70 / 90, 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_ARM_X) - VAL(LEFT_LINK_MOTION) * 70 / 90 + rightLegX[animateCounter], 1.0, 0.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_ARM_Y) - VAL(LEFT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_ARM_Z) + VAL(LEFT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
@@ -109,7 +131,7 @@ void SampleModel::draw()
 				drawSphere(0.8);
 					// Right upper arm
 					glRotated(90, 1.0, 0.0, 0.0);
-					glRotated(VAL(RIGHT_UPPER_ARM_X) - VAL(RIGHT_LINK_MOTION) * 70 / 90, 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_X) - VAL(RIGHT_LINK_MOTION) * 70 / 90 + leftLegX[animateCounter], 1.0, 0.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_Y) + VAL(RIGHT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_Z) - VAL(RIGHT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
@@ -172,7 +194,7 @@ void SampleModel::draw()
 				drawSphere(1.0);
 					// Left upper leg
 					glRotated(-90, 1.0, 0.0, 0.0);
-					glRotated(VAL(LEFT_UPPER_LEG_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_LEG_X)+leftLegX[animateCounter], 1.0, 0.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_LEG_Y), 0.0, 1.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_LEG_Z), 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
@@ -200,7 +222,7 @@ void SampleModel::draw()
 				drawSphere(1.0);
 					// Right upper leg
 					glRotated(-90, 1.0, 0.0, 0.0);
-					glRotated(VAL(RIGHT_UPPER_LEG_X), 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_LEG_X) + rightLegX[animateCounter], 1.0, 0.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_LEG_Y), 0.0, 1.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_LEG_Z), 0.0, 0.0, 1.0);					
 					glRotated(90, 1.0, 0.0, 0.0);
@@ -224,6 +246,11 @@ void SampleModel::draw()
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
+
+	if (VAL(ANIMATE))
+		animateCounter++;
+	if (animateCounter >= MAX_COUNT)
+		animateCounter = 0;
 	
 	/*
 	glPushMatrix();
@@ -311,6 +338,7 @@ int main()
 	controls[LEFT_THUMB] = ModelerControl("Left Thumb", -90, 0, 1, 0);
 	controls[RIGHT_THUMB] = ModelerControl("Right Thumb", -90, 0, 1, 0);
 
+	controls[ANIMATE] = ModelerControl("Animate", 0, 1, 1, 0);
 
     ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
     return ModelerApplication::Instance()->Run();

@@ -416,7 +416,82 @@ void drawTriangle( double x1, double y1, double z1,
     }
 }
 
+void drawHead()
+{
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+	//up front
+	drawTriangle(0.8, -0.4, 0, -0.8, -0.4, 0, -0.6, -0.2, 1.6);
+	drawTriangle(0.8, -0.4, 0, -0.6, -0.2, 1.6, 0.6, -0.2, 1.6);
 
+	//down front
+	drawTriangle(0.8, -0.4, 0, -0.8, -0.4, 0, 0.4, -0.2, -0.8);
+	drawTriangle(-0.8, -0.4, 0, -0.4, -0.2, -0.8, 0.4, -0.2, -0.8);
+
+	//top
+	setDiffuseColor(0.98f, 0.96f, 0.2f);
+	drawTriangle(0.6, -0.2, 1.6, -0.6, -0.2, 1.6, -0.6, 0.2, 1.6);
+	drawTriangle(0.6, -0.2, 1.6, 0.6, 0.2, 1.6, -0.6, 0.2, 1.6);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+
+	//up back
+	setDiffuseColor(0.98f, 0.96f, 0.2f);
+	drawTriangle(0.8, 0.4, 0, -0.8, 0.4, 0, -0.6, 0.2, 1.6);
+	drawTriangle(0.8, 0.4, 0, -0.6, 0.2, 1.6, 0.6, 0.2, 1.6);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+
+	//down back
+	drawTriangle(0.8, 0.4, 0, -0.8, 0.4, 0, 0.4, 0.2, -0.8);
+	drawTriangle(-0.8, 0.4, 0, -0.4, 0.2, -0.8, 0.4, 0.2, -0.8);
+
+	//down
+	drawTriangle(0.4, -0.2, -0.8, -0.4, -0.2, -0.8, -0.4, 0.2, -0.8);
+	drawTriangle(0.4, -0.2, -0.8, 0.4, 0.2, -0.8, -0.4, 0.2, -0.8);
+
+	//up left
+	drawTriangle(-0.8, -0.4, 0, -0.8, 0.4, 0, -0.6, -0.2, 1.6);
+	setDiffuseColor(0.98f, 0.96f, 0.2f);
+	drawTriangle(-0.6, 0.2, 1.6, -0.8, 0.4, 0, -0.6, -0.2, 1.6);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+
+	//up right
+	drawTriangle(0.8, -0.4, 0, 0.8, 0.4, 0, 0.6, -0.2, 1.6);
+	setDiffuseColor(0.98f, 0.86f, 0.2f);
+	drawTriangle(0.6, 0.2, 1.6, 0.8, 0.4, 0, 0.6, -0.2, 1.6);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+
+	//down left
+	drawTriangle(-0.8, -0.4, 0, -0.8, 0.4, 0, -0.4, -0.2, -0.8);
+	drawTriangle(-0.4, 0.2, -0.8, -0.8, 0.4, 0, -0.4, -0.2, -0.8);
+
+	//down right
+	drawTriangle(0.8, -0.4, 0, 0.8, 0.4, 0, 0.4, -0.2, -0.8);
+	drawTriangle(0.4, 0.2, -0.8, 0.8, 0.4, 0, 0.4, -0.2, -0.8);
+
+	//nose
+	drawTriangle(0, -0.375, 0.6, -0.2, -0.4, 0, 0, -0.6, 0.2);
+	drawTriangle(0, -0.375, 0.6, 0.2, -0.4, 0, 0, -0.6, 0.2);
+	drawTriangle(-0.2, -0.4, 0, 0.2, 0.4, 0, 0, -0.6, 0.2);
+
+	glPushMatrix();
+	glTranslated(-0.3, -0.2, 0.8);
+	drawSphere(0.3);
+	setDiffuseColor(0.0f, 0.0f, 0.0f);
+	glTranslated(0.02, -0.28, 0);
+	drawSphere(0.05);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0.3, -0.2, 0.8);
+	drawSphere(0.3);
+	setDiffuseColor(0.0f, 0.0f, 0.0f);
+	glTranslated(-0.02, -0.28, 0);
+	drawSphere(0.05);
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+	glPopMatrix();
+
+	glEnd();
+}
 
 
 

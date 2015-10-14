@@ -151,7 +151,8 @@ void SampleModel::draw()
 							// head
 							glTranslated(0,0,1.5);
 							glScaled(1,1,1.5);
-							drawSphere(1);
+							drawHead();
+							setDiffuseColor(COLOR_BLUE);
 				glPopMatrix();
 			glPopMatrix();
 

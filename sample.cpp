@@ -45,7 +45,8 @@ void SampleModel::draw()
 	*/
 
 	// draw the sample model
-	setAmbientColor(.1f,.1f,.1f);
+	//setAmbientColor(.1f,.1f,.1f);
+	setAmbientColor(1, 1, 1);
 	//setDiffuseColor(COLOR_GREEN);
 	
 	
@@ -73,9 +74,9 @@ void SampleModel::draw()
 				drawSphere(0.8);
 					// Left upper arm
 					glRotated(90, 1.0, 0.0, 0.0);
-					glRotated(VAL(LEFT_UPPER_ARM_X), 1.0, 0.0, 0.0);
-					glRotated(VAL(LEFT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
-					glRotated(VAL(LEFT_UPPER_ARM_Z), 0.0, 0.0, 1.0);				
+					glRotated(VAL(LEFT_UPPER_ARM_X) - VAL(LEFT_LINK_MOTION)*  70 / 90, 1.0, 0.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_ARM_Y) - VAL(LEFT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
+					glRotated(VAL(LEFT_UPPER_ARM_Z) + VAL(LEFT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
 					drawCylinder(4.5,0.8,0.6);
 						// Left lower arm pivot
@@ -83,7 +84,7 @@ void SampleModel::draw()
 						drawSphere(0.6);
 							// Left lower arm
 							glRotated(-90, 1.0, 0.0, 0.0);
-							glRotated(VAL(LEFT_LOWER_ARM_X), 1.0, 0.0, 0.0);
+							glRotated(VAL(LEFT_LOWER_ARM_X) - VAL(LEFT_LINK_MOTION)*130/90, 1.0, 0.0, 0.0);
 							glRotated(90, 1.0, 0.0, 0.0);
 							drawCylinder(3.5,0.6,0.4);
 								// Left hand pivot
@@ -108,9 +109,9 @@ void SampleModel::draw()
 				drawSphere(0.8);
 					// Right upper arm
 					glRotated(90, 1.0, 0.0, 0.0);
-					glRotated(VAL(RIGHT_UPPER_ARM_X), 1.0, 0.0, 0.0);
-					glRotated(VAL(RIGHT_UPPER_ARM_Y), 0.0, 1.0, 0.0);
-					glRotated(VAL(RIGHT_UPPER_ARM_Z), 0.0, 0.0, 1.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_X) - VAL(RIGHT_LINK_MOTION) * 70 / 90, 1.0, 0.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_Y) + VAL(RIGHT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
+					glRotated(VAL(RIGHT_UPPER_ARM_Z) - VAL(RIGHT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
 					drawCylinder(4.5, 0.8, 0.6);
 						// Right lower arm pivot
@@ -118,7 +119,7 @@ void SampleModel::draw()
 						drawSphere(0.6);
 							// Right lower arm
 							glRotated(-90, 1.0, 0.0, 0.0);
-							glRotated(VAL(RIGHT_LOWER_ARM_X), 1.0, 0.0, 0.0);
+							glRotated(VAL(RIGHT_LOWER_ARM_X) - VAL(RIGHT_LINK_MOTION) * 130 / 90, 1.0, 0.0, 0.0);
 							glRotated(90, 1.0, 0.0, 0.0);
 							drawCylinder(3.5, 0.6, 0.4);
 								// Right hand pivot
@@ -143,9 +144,9 @@ void SampleModel::draw()
 					drawSphere(0.7);
 						// Neck
 						glRotated(90, 1, 0, 0);
-						glRotated(VAL(HEAD_Z), 0, 0, 1);
+						glRotated(VAL(HEAD_X), 1, 0, 0);
 						glRotated(VAL(HEAD_Y), 0, 1, 0);
-						glRotated(VAL(HEAD_X), 1, 0, 0);						
+						glRotated(VAL(HEAD_Z), 0, 0, 1);						
 						glRotated(-90, 1, 0, 0);
 						drawCylinder(1,0.7,0.7);
 							// head
@@ -286,8 +287,10 @@ int main()
 	controls[RIGHT_LOWER_ARM_X] = ModelerControl("Right Lower Arm X", -140, 0, 1, 0); 
 	controls[LEFT_HAND_X] = ModelerControl("Left Hand X", -30, 30, 1, 0); 
 	controls[LEFT_HAND_Z] = ModelerControl("Left Hand Z", -60, 60, 1, 0);
+	controls[LEFT_LINK_MOTION] = ModelerControl("Left Link Motion", 0, 90, 1, 0);
 	controls[RIGHT_HAND_X] = ModelerControl("Right Hand X", -30, 30, 1, 0);
 	controls[RIGHT_HAND_Z] = ModelerControl("Right Hand Z", -60, 60, 1, 0);
+	controls[RIGHT_LINK_MOTION] = ModelerControl("Right Link Motion", 0, 90, 1, 0);
 	controls[LEFT_UPPER_LEG_X] = ModelerControl("Left Upper Leg X", -90, 45, 1, 0);
 	controls[LEFT_UPPER_LEG_Y] = ModelerControl("Left Upper Leg Y", -45, 90, 1, 0);
 	controls[LEFT_UPPER_LEG_Z] = ModelerControl("Left Upper Leg Z", 0, 45, 1, 0);

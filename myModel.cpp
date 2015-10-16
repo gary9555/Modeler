@@ -65,19 +65,6 @@ void MyModel::draw()
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
 
-	
-
-
-
-	/*
-	setAmbientColor(.1f,.1f,.1f);	
-	setDiffuseColor(COLOR_RED);
-	glPushMatrix();
-	glTranslated(-5,0,-5);
-	drawBox(10,0.01f,10);
-	glPopMatrix();
-	*/
-
 	// draw the sample model
 	setAmbientColor(0.1, 0.1, 0.1);
 	setDiffuseColor(COLOR_BLUE);
@@ -109,7 +96,11 @@ void MyModel::draw()
 					glRotated(VAL(LEFT_UPPER_ARM_Y) - VAL(LEFT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
 					glRotated(VAL(LEFT_UPPER_ARM_Z) + VAL(LEFT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
-					drawCylinder(4.5,0.8,0.6);
+					glScaled(0.2, 0.2, 0.5);
+					glRotated(-90, 0.0, 1.0, 0.0);
+					drawMetaarm();
+					glRotated(90, 0.0, 1.0, 0.0);
+					glScaled(5, 5, 2);
 						// Left lower arm pivot
 						glTranslated(0, 0, 4.5);
 						drawSphere(0.6);
@@ -155,7 +146,11 @@ void MyModel::draw()
 					glRotated(VAL(RIGHT_UPPER_ARM_Y) + VAL(RIGHT_LINK_MOTION) * 35 / 90, 0.0, 1.0, 0.0);
 					glRotated(VAL(RIGHT_UPPER_ARM_Z) - VAL(RIGHT_LINK_MOTION) * 25 / 90, 0.0, 0.0, 1.0);
 					glRotated(90, 1.0, 0.0, 0.0);
-					drawCylinder(4.5, 0.8, 0.6);
+					glScaled(0.2, 0.2, 0.5);
+					glRotated(-90, 0.0, 1.0, 0.0);
+					drawMetaarm();
+					glRotated(90, 0.0, 1.0, 0.0);
+					glScaled(5, 5, 2);
 						// Right lower arm pivot
 						glTranslated(0, 0, 4.5);
 						drawSphere(0.6);
@@ -287,11 +282,6 @@ void MyModel::draw()
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
-
-	if (VAL(ANIMATE))
-		animateCounter++;
-	if (animateCounter >= MAX_COUNT)
-		animateCounter = 0;
 	
 	/*
 	glPushMatrix();

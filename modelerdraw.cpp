@@ -330,7 +330,7 @@ void drawCylinderWithTexture(double h, double r1, double r2, const char* dir)
 	{
 		GLUquadricObj* gluq;
 
-		/* GLU will again do the work.  draw the sides of the cylinder. */
+		// GLU will again do the work.  draw the sides of the cylinder. 
 		glEnable(GL_TEXTURE_2D);
 		Texture tex;
 		tex.loadBMP_custom(dir);
@@ -343,8 +343,8 @@ void drawCylinderWithTexture(double h, double r1, double r2, const char* dir)
 
 		if (r1 > 0.0)
 		{
-			/* if the r1 end does not come to a point, draw a flat disk to
-			cover it up. */
+			// if the r1 end does not come to a point, draw a flat disk to
+			//cover it up. 
 
 			gluq = gluNewQuadric();
 			gluQuadricDrawStyle(gluq, GLU_FILL);
@@ -356,19 +356,19 @@ void drawCylinderWithTexture(double h, double r1, double r2, const char* dir)
 
 		if (r2 > 0.0)
 		{
-			/* if the r2 end does not come to a point, draw a flat disk to
-			cover it up. */
+			// if the r2 end does not come to a point, draw a flat disk to
+			//cover it up. 
 
-			/* save the current matrix mode. */
+			// save the current matrix mode. 
 			int savemode;
 			glGetIntegerv(GL_MATRIX_MODE, &savemode);
 
-			/* translate the origin to the other end of the cylinder. */
+			// translate the origin to the other end of the cylinder. 
 			glMatrixMode(GL_MODELVIEW);
 			glPushMatrix();
 			glTranslated(0.0, 0.0, h);
 
-			/* draw a disk centered at the new origin. */
+			// draw a disk centered at the new origin. 
 			gluq = gluNewQuadric();
 			gluQuadricDrawStyle(gluq, GLU_FILL);
 			gluQuadricTexture(gluq, GL_TRUE);
@@ -376,7 +376,7 @@ void drawCylinderWithTexture(double h, double r1, double r2, const char* dir)
 			gluDisk(gluq, 0.0, r2, divisions, divisions);
 			gluDeleteQuadric(gluq);
 
-			/* restore the matrix stack and mode. */
+			// restore the matrix stack and mode. 
 			glPopMatrix();
 			glMatrixMode(savemode);
 		}

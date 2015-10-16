@@ -97,7 +97,7 @@ void MyModel::draw()
 			glRotated(VAL(UPPER_BODY_Z), 0.0, 0.0, 1.0);
 			glRotated(-90, 1.0, 0.0, 0.0);
 			glScaled(2, 1.4, 1);
-			//drawCylinderWithTexture(4, 1, 1.2, "./images/shirt.bmp");
+			drawCylinderWithTexture(4, 1, 1.2, "./images/shirt.bmp");
 			glScaled(0.5, 1 / 1.4, 1);
 				// Left upper arm pivot
 				glPushMatrix();
@@ -227,7 +227,7 @@ void MyModel::draw()
 			glRotated(VAL(LOWER_BODY_Z), 0.0, 0.0, 1.0);
 			glRotated(90, 1.0, 0.0, 0.0);
 			glScaled(2, 1.4, 1);
-			//drawCylinderWithTexture(3, 1, 1.2, "./images/trouser.bmp");
+			drawCylinderWithTexture(3, 1, 1.2, "./images/trouser.bmp");
 			glScaled(0.5, 1/1.4, 1);
 				// Left upper leg pivot
 				glPushMatrix(); 

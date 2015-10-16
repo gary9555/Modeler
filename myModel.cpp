@@ -2,6 +2,8 @@
 #include "modelerview.h"
 #include "modelerapp.h"
 #include "modelerdraw.h"
+#include "camera.h"
+
 #include <FL/gl.h>
 
 #include "modelerglobals.h"
@@ -51,6 +53,10 @@ ModelerView* createMyModel(int x, int y, int w, int h, char *label)
 // method of ModelerView to draw out MyModel
 void MyModel::draw()
 {
+
+	if (VAL(FRAME_ALL)){
+		ModelerView::m_camera->setDolly(-46.0);
+	}
     // This call takes care of a lot of the nasty projection 
     // matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
@@ -64,6 +70,8 @@ void MyModel::draw()
 
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
+
+	
 
 	
 
@@ -194,7 +202,7 @@ void MyModel::draw()
 							// head
 							glTranslated(0,0,1.5);
 							glScaled(1,1,1.5);
-							drawHead(VAL(NOSE_SIZE));
+							drawHead(VAL(NOSE_SIZE), VAL(EYE_COLOR), VAL(EYE_SIZE), VAL(EYE_BALL_SIZE), VAL(EYE_DIST));
 							glScaled(1, 1, 1.0/1.5);
 								// hat
 								if (VAL(HAT)){
@@ -387,10 +395,11 @@ int main()
 	controls[HAT] = ModelerControl("Hat", 0, 1, 1, 0);
 	controls[CIGAR] = ModelerControl("Cigar", 0, 1, 1, 0);
 	controls[NOSE_SIZE] = ModelerControl("Nose Size", 1, 1.5, 0.1, 1);
-
-
-
-
+	controls[EYE_COLOR] = ModelerControl("Eye Color", 0, 2, 1, 0);
+	controls[EYE_SIZE] = ModelerControl("Eye Size", 1, 2, 0.1f, 1);
+	controls[EYE_BALL_SIZE] = ModelerControl("Eye Ball Size", 1, 1.5, 0.1f, 1);
+	controls[EYE_DIST] = ModelerControl("Eye Distance", 0.2, 0.5, 0.05, 0.3f);
+	controls[FRAME_ALL] = ModelerControl("Frame All", 0, 1, 1, 0);
 
 	controls[ANIMATE] = ModelerControl("Animate", 0, 1, 1, 0);
 

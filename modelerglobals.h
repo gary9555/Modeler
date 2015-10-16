@@ -62,6 +62,11 @@ enum myModelControls
 	HAT,
 	CIGAR,
 	NOSE_SIZE,
+	EYE_COLOR,
+	EYE_SIZE,
+	EYE_BALL_SIZE,
+	EYE_DIST,
+	FRAME_ALL,
 	NUMCONTROLS
 };
 

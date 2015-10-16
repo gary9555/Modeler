@@ -503,8 +503,10 @@ void drawTriangle( double x1, double y1, double z1,
     }
 }
 
-void drawHead(float noseScale)
+void drawHead(float noseScale, int eyeColor, float eyeScale, float eyeBallScale, float eyeDist)
 {
+	glPushMatrix();
+
 	setDiffuseColor(0.0f, 0.8f, 0.8f);
 	//up front
 	drawTriangle(0.8, -0.4, 0, -0.8, -0.4, 0, -0.6, -0.2, 1.6);
@@ -562,24 +564,66 @@ void drawHead(float noseScale)
 	drawTriangle(-0.2, -0.4, 0, 0.2, 0.4, 0, 0, -0.6, 0.2);
 	glPopMatrix();
 
+	// eye1
 	glPushMatrix();
-	glTranslated(-0.3, -0.2, 0.8);
+	glTranslated(-eyeDist, -0.2, 0.8);
+	//glPushMatrix();
+	//glScaled(eyeBallScale, eyeBallScale, eyeBallScale);
 	drawSphere(0.3);
-	setDiffuseColor(0.0f, 0.0f, 0.0f);
+	//glPopMatrix();
+	switch (eyeColor){
+	case 0:
+		// black
+		setDiffuseColor(0.0f, 0.0f, 0.0f);
+		break;
+	case 1:
+		// blue
+		setDiffuseColor(COLOR_BLUE);
+		break;
+	case 2:
+		// red
+		setDiffuseColor(COLOR_RED);
+		break;
+	}
 	glTranslated(0.02, -0.28, 0);
-	drawSphere(0.05);
-	setDiffuseColor(0.0f, 0.8f, 0.8f);
-	glPopMatrix();
-
 	glPushMatrix();
-	glTranslated(0.3, -0.2, 0.8);
-	drawSphere(0.3);
-	setDiffuseColor(0.0f, 0.0f, 0.0f);
-	glTranslated(-0.02, -0.28, 0);
-	drawSphere(0.05);
+		glScaled(eyeScale, eyeScale, eyeScale);
+		drawSphere(0.05);
+	glPopMatrix();
 	setDiffuseColor(0.0f, 0.8f, 0.8f);
 	glPopMatrix();
 
+
+	// eye2
+	glPushMatrix();
+	glTranslated(eyeDist, -0.2, 0.8);   //0.3
+	//glPushMatrix();
+	//glScaled(eyeBallScale, eyeBallScale, eyeBallScale);
+	drawSphere(0.3);
+	//glPopMatrix();
+	switch (eyeColor){
+	case 0:
+		// black
+		setDiffuseColor(0.0f, 0.0f, 0.0f);
+		break;
+	case 1:
+		// blue
+		setDiffuseColor(COLOR_BLUE);
+		break;
+	case 2:
+		// red
+		setDiffuseColor(COLOR_RED);
+		break;
+	}
+	glTranslated(-0.02, -0.28, 0);
+	glPushMatrix();
+		glScaled(eyeScale, eyeScale, eyeScale);
+		drawSphere(0.05);
+	glPopMatrix();
+	setDiffuseColor(0.0f, 0.8f, 0.8f);
+	glPopMatrix();
+
+	glPopMatrix();
 	//glEnd();
 }
 

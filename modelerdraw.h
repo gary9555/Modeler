@@ -96,8 +96,9 @@ void drawTriangle( double x1, double y1, double z1,
 			       double x3, double y3, double z3 );
 
 // Draw the character's head
-void drawHead();
 void drawMetaarm();
+void drawHead(float noseScale, int eyeColor, float eyeScale, float eyeBallScale, float eyeDist);
+
 
 // Draw a 
 void drawGun();

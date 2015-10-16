@@ -182,7 +182,10 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="tex.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="vector3d.cpp" />
+=======
+>>>>>>> a48c7585f4a8dba13347a3625da7989d3a2b715b
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmap.h" />

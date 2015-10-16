@@ -15,7 +15,7 @@ const float kMouseRotationSensitivity		= 1.0f/90.0f;
 const float kMouseTranslationXSensitivity	= 0.03f;
 const float kMouseTranslationYSensitivity	= 0.03f;
 const float kMouseZoomSensitivity			= 0.08f;
-const float kMouseTwistSensitivity			= 0.01f;
+const float kMouseTwistSensitivity			= 0.005f;
 
 void Normalize(double* vector)
 {
@@ -158,7 +158,7 @@ void Camera::calculateViewingTransformParameters()
 Camera::Camera() 
 {
 	mElevation = mAzimuth = mTwist = 0.0f;
-	mDolly = -20.0f;
+	mDolly = -46.0f;//-20.0f;
 	mElevation = 0.2f;
 	mAzimuth = (float)M_PI;
 

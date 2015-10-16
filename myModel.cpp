@@ -206,6 +206,7 @@ void MyModel::draw()
 									glPopMatrix();
 									setDiffuseColor(COLOR_BLUE);
 								}
+								// cigar
 								if (VAL(CIGAR)){
 									setDiffuseColor(0.90, 0.40, 0.02);
 									glPushMatrix();

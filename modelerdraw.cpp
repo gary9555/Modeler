@@ -529,8 +529,56 @@ void drawGun(){
 	drawTriangle(0, 2.25, 5, 0.4, 3, 4, -0.4, 3, 4);
 }
 
+void drawSemiSphere(double r){
+	double clipEq[4] = { 0, 1, 0, 0 };
+
+	glEnable(GL_CLIP_PLANE0);
+	glClipPlane(GL_CLIP_PLANE0, clipEq);
+		
+		drawSphere(r);
+	
+	
+	glDisable(GL_CLIP_PLANE0);
+}
+
+void drawHat(double innerR, double outerR){
+	glPushMatrix();
+	drawSemiSphere(innerR);
+	glRotated(-90, 1.0, 0.0, 0.0);
+	drawCylinder(0.1, outerR, outerR);
+	glPopMatrix();
+}
 
 
+/*
+void drawSemiSphere(int scalex, int scaley, GLfloat r){
+	
+	int i, j;
+	const int scale = scalex*scaley;
+	GLfloat v[1][3];
+
+	for (i = 0; i<scalex; ++i) {
+		for (j = 0; j<scaley; ++j) {
+			v[i*scaley + j][0] = r*cos(j * 2 * M_PI / scaley)*cos(i*M_PI / (2 * scalex));
+			v[i*scaley + j][1] = r*sin(i*M_PI / (2 * scalex));
+			v[i*scaley + j][2] = r*sin(j * 2 * M_PI / scaley)*cos(i*M_PI / (2 * scalex));
+		}
+	}
+
+	glBegin(GL_QUADS);
+	for (i = 0; i<scalex - 1; ++i) {
+		for (j = 0; j<scaley; ++j) {
+			glVertex3fv(v[i*scaley + j]);
+			glVertex3fv(v[i*scaley + (j + 1) % scaley]);
+			glVertex3fv(v[(i + 1)*scaley + (j + 1) % scaley]);
+			glVertex3fv(v[(i + 1)*scaley + j]);
+		}
+	}
+	glEnd();
+	
+}
+
+*/
 
 
 

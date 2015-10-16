@@ -109,6 +109,8 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <AdditionalOptions>/NODEFAULTLIB:library  %(AdditionalOptions)</AdditionalOptions>

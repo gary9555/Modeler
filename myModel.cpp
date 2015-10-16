@@ -1,5 +1,4 @@
-// The sample model.  You should build a file
-// very similar to this for when you make your model.
+// my model.  
 #include "modelerview.h"
 #include "modelerapp.h"
 #include "modelerdraw.h"
@@ -8,6 +7,11 @@
 #include "modelerglobals.h"
 
 #define  MAX_COUNT    60
+
+//static GLfloat lightPosition0[] = { VAL(LIGHT_X), VAL(LIGHT_Y), VAL(LIGHT_Z),0 };// { 4, 2, -4, 0 };  
+//static GLfloat lightDiffuse0[] = { 1, 1, 1, 1 };
+static GLfloat lightPosition1[] = { -8, 0, -20, 0 };
+static GLfloat lightDiffuse1[] = { 1, 1, 1, 1 };
 
 // To make a MyModel, we inherit off of ModelerView
 class MyModel : public ModelerView 
@@ -52,8 +56,19 @@ void MyModel::draw()
 	// projection matrix, don't bother with this ...
     ModelerView::draw();
 	// trying VS github
-	// draw the floor
+	GLfloat lightPosition0[] = { VAL(LIGHT_X), VAL(LIGHT_Y), VAL(LIGHT_Z), 0 };
+	GLfloat lightDiffuse0[] = { VAL(LIGHT_INTENSITY), VAL(LIGHT_INTENSITY), VAL(LIGHT_INTENSITY), 1 };
+
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
+
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
+
 	
+
+
+
 	/*
 	setAmbientColor(.1f,.1f,.1f);	
 	setDiffuseColor(COLOR_RED);
@@ -64,17 +79,11 @@ void MyModel::draw()
 	*/
 
 	// draw the sample model
-	setAmbientColor(1, 1, 1);
-	
-	
+	setAmbientColor(0.1, 0.1, 0.1);
 	setDiffuseColor(COLOR_BLUE);
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
-		// Just a complex shaped rendered by triangles
-		glPushMatrix();
-		glTranslated(6, 0, 0);
-		drawGun();
-		glPopMatrix();
+		
 		// center of the body
 		glPushMatrix();
 		glScaled(2, 1, 1);
@@ -117,12 +126,23 @@ void MyModel::draw()
 									glRotated(VAL(LEFT_HAND_Z), 0.0, 1.0, 0.0);
 									glTranslated(-0.2, -0.5, 0);
 									drawBox(0.4, 1, 1.2);
+										// Gun	
+										if (VAL(GUN)){
+											setDiffuseColor(0.55, 0.52, 0.41);
+											glPushMatrix();
+											glTranslated(-0.4, 0, 0.2);
+											drawGun();
+											glPopMatrix();
+											setDiffuseColor(COLOR_BLUE);
+										}
 										// Left thumb
+										glPushMatrix();
 										glTranslated(0, 1, 0);
 										glTranslated(0.2, 0, 0);
 										glRotated(VAL(LEFT_THUMB), 1.0, 0.0, 0.0);
 										glTranslated(-0.2, 0, 0);
 										drawBox(0.4,0.4,0.6);
+										glPopMatrix();
 				glPopMatrix();
 
 				// Right upper arm pivot
@@ -175,6 +195,26 @@ void MyModel::draw()
 							glTranslated(0,0,1.5);
 							glScaled(1,1,1.5);
 							drawHead();
+							glScaled(1, 1, 1.0/1.5);
+								// hat
+								if (VAL(HAT)){
+									setDiffuseColor(0.76, 0.65, 0.19);
+									glPushMatrix();
+									glTranslated(0, 0, 1.8);
+									glRotated(90, 1.0, 0.0, 0.0);									
+									drawHat(1, 2);
+									glPopMatrix();
+									setDiffuseColor(COLOR_BLUE);
+								}
+								if (VAL(CIGAR)){
+									setDiffuseColor(0.90, 0.40, 0.02);
+									glPushMatrix();
+									glTranslated(0, 0, -0.2);
+									glRotated(90, 1.0, 0.0, 0.0);
+									drawCylinder(1.5, 0.1, 0.15);
+									glPopMatrix();
+									setDiffuseColor(COLOR_BLUE);
+								}
 							setDiffuseColor(COLOR_BLUE);
 				glPopMatrix();
 			glPopMatrix();
@@ -292,12 +332,17 @@ int main()
 	// Constructor is ModelerControl(name, minimumvalue, maximumvalue, 
 	// stepsize, defaultvalue)
     ModelerControl controls[NUMCONTROLS];
+	controls[TEST] = ModelerControl("Test", 0, 1, 0.1f, 1);
+
     controls[XPOS] = ModelerControl("X Position", -5, 5, 0.1f, 0);
     controls[YPOS] = ModelerControl("Y Position", 0, 5, 0.1f, 0);
     controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
     controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
-	controls[WIRE] = ModelerControl("Wire Lenght", 0, 5, 0.1f, 1);
+	controls[LIGHT_INTENSITY] = ModelerControl("Light Intensity", 0, 5, 0.1f, 1);
+	controls[LIGHT_X] = ModelerControl("Light X", -30, 30, 1, 4);
+	controls[LIGHT_Y] = ModelerControl("Light Y", -30, 30, 1, 2);
+	controls[LIGHT_Z] = ModelerControl("Light Z", -30, 30, 1, 4);
 	controls[UPPER_BODY_X] = ModelerControl("Upper Body X", -90, 90, 1, 0);
 	controls[UPPER_BODY_Y] = ModelerControl("Upper Body Y", -90, 90, 1, 0);
 	controls[UPPER_BODY_Z] = ModelerControl("Upper Body Z", -45, 45, 1, 0);
@@ -337,6 +382,12 @@ int main()
 	controls[RIGHT_HAND_Z] = ModelerControl("Right Hand Z", -60, 60, 1, 0);
 	controls[LEFT_THUMB] = ModelerControl("Left Thumb", -90, 0, 1, 0);
 	controls[RIGHT_THUMB] = ModelerControl("Right Thumb", -90, 0, 1, 0);
+	controls[GUN] = ModelerControl("Gun", 0, 1, 1, 0);
+	controls[HAT] = ModelerControl("Hat", 0, 1, 1, 0);
+	controls[CIGAR] = ModelerControl("Cigar", 0, 1, 1, 0);
+
+
+
 
 	controls[ANIMATE] = ModelerControl("Animate", 0, 1, 1, 0);
 

@@ -1,36 +1,12 @@
-﻿Build started 2015/10/15 6:47:06.
-     1>Project "D:\Documents\Academics\COMP4411\ModSkelF14\modeler.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 2015/10/16 10:59:28.
+     1>Project "D:\Documents\Academics\COMP4411\ModSkelF14\modeler.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Ilocal\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt bitmap.cpp camera.cpp modelerapp.cpp modelerdraw.cpp modelerui.cxx modelerview.cpp myModel.cpp
-         myModel.cpp
-         modelerview.cpp
-         modelerui.cxx
-     1>d:\documents\academics\comp4411\modskelf14\modelerui.cxx(103): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Ilocal\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc120.pdb" /Gd /TP /analyze- /errorReport:prompt modelerdraw.cpp
          modelerdraw.cpp
-     1>d:\documents\academics\comp4411\modskelf14\modelerdraw.cpp(151): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-         modelerapp.cpp
-     1>d:\documents\academics\comp4411\modskelf14\modelerapp.cpp(37): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(195) : see declaration of 'strncpy'
-         camera.cpp
-         bitmap.cpp
-     1>d:\documents\academics\comp4411\modskelf14\bitmap.cpp(22): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>d:\documents\academics\comp4411\modskelf14\bitmap.cpp(128): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-         Generating Code...
-       Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/modeler.exe" /INCREMENTAL /NOLOGO /LIBPATH:local\lib opengl32.lib glu32.lib wsock32.lib fltk.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:libcmt /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug/modeler.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:".\Debug\modeler.lib" /MACHINE:X86 /SAFESEH:NO .\Debug/bitmap.obj
-         .\Debug/camera.obj
-         .\Debug/modelerapp.obj
-         .\Debug/modelerdraw.obj
-         .\Debug/modelerui.obj
-         .\Debug/modelerview.obj
-         .\Debug/myModel.obj
-         modeler.vcxproj -> D:\Documents\Academics\COMP4411\ModSkelF14\.\Debug\modeler.exe
-     1>Done Building Project "D:\Documents\Academics\COMP4411\ModSkelF14\modeler.vcxproj" (Rebuild target(s)).
+     1>d:\documents\academics\comp4411\modskelf14\modelerdraw.cpp : fatal error C1041: cannot open program database 'd:\documents\academics\comp4411\modskelf14\debug\vc120.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+     1>Done Building Project "D:\Documents\Academics\COMP4411\ModSkelF14\modeler.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:25.66
+Time Elapsed 00:00:00.44

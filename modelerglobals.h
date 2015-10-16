@@ -10,12 +10,16 @@
 // of the controls from the user interface.
 enum myModelControls
 { 
+	TEST,
 	XPOS,
 	YPOS,
 	ZPOS,
 	HEIGHT,
 	ROTATE,
-	WIRE,
+	LIGHT_X,
+	LIGHT_Y,
+	LIGHT_Z,
+	LIGHT_INTENSITY,
 	UPPER_BODY_X,
 	UPPER_BODY_Y,
 	UPPER_BODY_Z,
@@ -52,6 +56,9 @@ enum myModelControls
 	LEFT_FOOT_X,
 	RIGHT_FOOT_X,
 	ANIMATE,
+	GUN,
+	HAT,
+	CIGAR,
 	NUMCONTROLS
 };
 

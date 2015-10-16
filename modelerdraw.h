@@ -100,4 +100,7 @@ void drawHead();
 // Draw a 
 void drawGun();
 
+void drawSemiSphere(double r);
+void drawHat(double innerR, double outerR);
+
 #endif

@@ -59,6 +59,7 @@ enum myModelControls
 	GUN,
 	HAT,
 	CIGAR,
+	NOSE_SIZE,
 	NUMCONTROLS
 };
 

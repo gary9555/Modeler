@@ -142,7 +142,7 @@ void MyModel::draw()
 										glRotated(VAL(LEFT_THUMB), 1.0, 0.0, 0.0);
 										glTranslated(-0.2, 0, 0);
 										drawBox(0.4,0.4,0.6);
-										glPopMatrix();
+										glPopMatrix();   
 				glPopMatrix();
 
 				// Right upper arm pivot
@@ -194,7 +194,7 @@ void MyModel::draw()
 							// head
 							glTranslated(0,0,1.5);
 							glScaled(1,1,1.5);
-							drawHead();
+							drawHead(VAL(NOSE_SIZE));
 							glScaled(1, 1, 1.0/1.5);
 								// hat
 								if (VAL(HAT)){
@@ -386,6 +386,8 @@ int main()
 	controls[GUN] = ModelerControl("Gun", 0, 1, 1, 0);
 	controls[HAT] = ModelerControl("Hat", 0, 1, 1, 0);
 	controls[CIGAR] = ModelerControl("Cigar", 0, 1, 1, 0);
+	controls[NOSE_SIZE] = ModelerControl("Nose Size", 1, 1.5, 0.1, 1);
+
 
 
 

@@ -1,4 +1,5 @@
 #include "modelerdraw.h"
+//#include "modelerglobals.h"
 #include <FL/gl.h>
 #include <GL/glu.h>
 #include <cstdio>
@@ -416,7 +417,7 @@ void drawTriangle( double x1, double y1, double z1,
     }
 }
 
-void drawHead()
+void drawHead(float noseScale)
 {
 	setDiffuseColor(0.0f, 0.8f, 0.8f);
 	//up front
@@ -468,9 +469,12 @@ void drawHead()
 	drawTriangle(0.4, 0.2, -0.8, 0.8, 0.4, 0, 0.4, -0.2, -0.8);
 
 	//nose
+	glPushMatrix();
+	glScaled(noseScale, noseScale, noseScale);
 	drawTriangle(0, -0.375, 0.6, -0.2, -0.4, 0, 0, -0.6, 0.2);
 	drawTriangle(0, -0.375, 0.6, 0.2, -0.4, 0, 0, -0.6, 0.2);
 	drawTriangle(-0.2, -0.4, 0, 0.2, 0.4, 0, 0, -0.6, 0.2);
+	glPopMatrix();
 
 	glPushMatrix();
 	glTranslated(-0.3, -0.2, 0.8);
